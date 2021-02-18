@@ -10,8 +10,10 @@
 <body>
     
     <h1>Crea un nuovo Post</h1>
-    <form action="#" method="post">
+    <form action="{{route('posts.store')}}" method="post">
+        @csrf
         <input type="text">
+        <button type="submit">Submit</button>
     </form>
 
 </body>
