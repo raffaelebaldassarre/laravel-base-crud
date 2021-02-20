@@ -90,11 +90,12 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($post)
     {
         //
-        $post= Post::find($post->id);
-        $post->delete();
-        return redirect('/');
+            $post = Post::find($post);
+            $post->delete();
+
+            return redirect('/posts')->with('success', 'Post Cancellato!');
     }
 }

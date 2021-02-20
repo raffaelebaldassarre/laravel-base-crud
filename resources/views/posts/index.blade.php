@@ -34,7 +34,9 @@
                     <i class="fas fa-eye fa-lg fa-fw"></i>
                     Edit
                 </a>
-                <form action="{{ route('posts.destroy',$post->id) }}" method="get">
+                <form action="{{ route('posts.destroy', $post->id) }}" method="post">
+                    @csrf
+                    @method('DELETE')
                     <button type="submit" class="btn btn-danger">
                     <i class="fas fa-trash fa-lg fa-fw"></i>
                     Delete</button>
@@ -45,6 +47,14 @@
         @empty
         <div>Nessun Post al momento</div>
         @endforelse
+        <div class="col-sm-12">
+
+            @if(session()->get('success'))
+              <div class="alert alert-success">
+                {{ session()->get('success') }}  
+              </div>
+            @endif
+          </div>
     </tbody>
 </table>
 @endsection
