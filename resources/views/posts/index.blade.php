@@ -1,35 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Laravel Blog</title>
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
-</head>
-<body>
-    
-    <h1>Laravel Blog</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>title</th>
-                <th>body</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($posts as $value)
-            <tr>
-                <td>{{$value->id}}</td>
-                <td>{{$value->title}}</td>
-                <td>{{$value->body}}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+@extends('layouts.app')
 
-    <a href="{{route('posts.create')}}">Crea un nuovo Post</a>
+@section('content')
 
-</body>
-</html>
+<h1>Tutti i Post</h1>
+
+<a href="{{ route('posts.create') }}" class="btn btn-warning"> Crea un nuovo post</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Body</th>
+            <th>Created at</th>
+            <th>Updated at</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @forelse ($posts as $post)
+        <tr>
+            <td>{{$post->id}}</td>
+            <td>{{$post->title}}</td>
+            <td>{{$post->body}}</td>
+            <td>{{$post->created_at}}</td>
+            <td>{{$post->updated_at}}</td>
+            <td>
+                <a href="" class="btn btn-primary">
+                    <i class="fas fa-eye fa-lg fa-fw"></i>
+                    View
+                </a>
+                <a href="" class="btn btn-primary">
+                    <i class="fas fa-eye fa-lg fa-fw"></i>
+                    Edit
+                </a>
+                <form action="{{ route('posts.destroy',$post->id) }}" method="get">
+                    <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash fa-lg fa-fw"></i>
+                    Delete</button>
+                </form>
+
+            </td>
+        </tr>
+        @empty
+        <div>Nessun Post al momento</div>
+        @endforelse
+    </tbody>
+</table>
+@endsection

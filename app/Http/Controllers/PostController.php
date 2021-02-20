@@ -14,9 +14,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        // dd($posts);
+        //
+
+        $posts = Post::latest()->get();
+
         return view('posts.index', compact('posts'));
+
     }
 
     /**
@@ -39,7 +42,12 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
-        dd('Ciao', $request);
+        $post = new Post;
+        $post->title = request('title');
+        $post->body = request('body');
+        $post->save();
+
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -85,5 +93,8 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+        $post= Post::find($post->id);
+        $post->delete();
+        return redirect('/');
     }
 }
