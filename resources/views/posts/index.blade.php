@@ -26,11 +26,11 @@
             <td>{{$post->created_at}}</td>
             <td>{{$post->updated_at}}</td>
             <td>
-                <a href="" class="btn btn-primary">
+                <a href="{{ route('posts.show',$post->id)}}" class="btn btn-primary">
                     <i class="fas fa-eye fa-lg fa-fw"></i>
                     View
                 </a>
-                <a href="" class="btn btn-primary">
+                <a href="{{ route('posts.edit',$post->id)}}" class="btn btn-primary">
                     <i class="fas fa-eye fa-lg fa-fw"></i>
                     Edit
                 </a>
