@@ -56,9 +56,12 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($post)
     {
         //
+        $post = Post::find($post);
+
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -67,10 +70,13 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($post)
     {
         //
+        $post = Post::find($post);
+        return view('posts.edit', compact('post')); 
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -79,10 +85,21 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'title'=>'required',
+            'body'=>'required'
+        ]);
+
+        $post = Post::find($id);
+        $post->title = $request->get('title');
+        $post->body = $request->get('body');
+        $post->save();
+        return redirect('/posts')->with('success', 'Post salvato!');
     }
+
 
     /**
      * Remove the specified resource from storage.
