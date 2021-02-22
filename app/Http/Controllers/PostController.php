@@ -41,11 +41,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $validateData= $request->validate([
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+        Post::create($validateData);
         //
-        $post = new Post;
+        /* $post = new Post;
         $post->title = request('title');
         $post->body = request('body');
-        $post->save();
+        $post->save(); */
 
         return redirect()->route('posts.index');
     }

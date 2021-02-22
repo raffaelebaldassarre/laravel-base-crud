@@ -23,11 +23,11 @@
             @method('PATCH') 
             @csrf
             <div class="form-group">
-                <label for="title">Title :</label>
+                <label for="title">Titolo :</label>
                 <input type="text" class="form-control" name="title" value="{{$post->title}}" />
             </div>
             <div class="form-group">
-                <label for="body">Body Post:</label>
+                <label for="body">Testo :</label>
                 <textarea id="validationTextarea" class="form-control " name="body" cols="50" rows="10">{{$post->body}}</textarea>
             </div>
             <button type="submit" class="btn btn-primary">Aggiorna</button>
