@@ -22,6 +22,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route ('contacts')}}">Contacts</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('posts.index') }}">Lista Post</a>
+                    </li>
                 </ul>
             </nav>
         </header>
